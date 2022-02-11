@@ -1,0 +1,45 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: 'Shell command retry'
+description: "GitHub Action to repeatedly retry a shell command upon failure."
+author: 'cytopia'
+branding:
+  icon: 'code'
+  color: 'red'
+
+inputs:
+  retries:
+    description: 'How many times to retry on failure'
+    required: false
+    default: 10
+  pause:
+    description: 'How many seconds to wait between retries'
+    required: false
+    default: 10
+  command:
+    description: 'Shell command to execute'
+    required: true
+    default: 'true'
+
+runs:
+  using: "composite"
+  steps:
+    - name: execute
+      shell: bash
+      run: |
+        retry() {
+          for n in $(seq ${RETRIES}); do
+            echo "[${n}/${RETRIES}] ${*}";
+            if eval "${*}"; then
+              echo "[SUCC] ${n}/${RETRIES}";
+              return 0;
+            fi;
+            sleep ${PAUSE};
+            echo "[FAIL] ${n}/${RETRIES}";
+          done;
+          return 1;
+        }
+        retry ${COMMAND}
+      env:
+        RETRIES: ${{ inputs.retries }}
+        PAUSE: ${{ inputs.pause }}
+        COMMAND: ${{ inputs.command }}
