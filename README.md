@@ -1,5 +1,12 @@
 # Shell command retry action
 
+
+[![GitHub release](https://img.shields.io/github/release/cytopia/shell-command-retry-action.svg?logo=github)](https://github.com/cytopia/shell-command-retry-action/releases/latest)
+[![GitHub marketplace](https://img.shields.io/badge/marketplace-shell--command--retry--action-blue?logo=github)](https://github.com/marketplace/actions/shell-command-retry-action)
+[![](https://img.shields.io/badge/github-cytopia%2Fshell--command--retry--action-red.svg?logo=github)](https://github.com/cytopia/shell-command-retry-action "github.com/cytopia/shell-command-retry-action")
+[![test](https://github.com/cytopia/shell-command-retry-action/actions/workflows/test.yml/badge.svg)](https://github.com/cytopia/shell-command-retry-action/actions/workflows/test.yml)
+
+
 ## Usage
 
 ```yaml
