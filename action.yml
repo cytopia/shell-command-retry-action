@@ -1,5 +1,5 @@
 # https://help.github.com/en/articles/metadata-syntax-for-github-actions
-name: 'Shell command retry'
+name: 'Shell command retry action'
 description: "GitHub Action to repeatedly retry a shell command upon failure."
 author: 'cytopia'
 branding:
