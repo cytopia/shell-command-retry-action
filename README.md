@@ -17,6 +17,7 @@ The following inputs can be used to alter the Docker tag name determination:
 | `retries` | No       | `10`     | How many times to retry on failure.       |
 | `pause`   | No       | `10`     | How many seconds to wait between retries. |
 | `command` | Yes      | ``       | Shell command to execute                  |
+| `workdir` | No       | ``       | Switch to this working directory prior executing the shell command |
 
 
 ## :arrow_backward: Outputs
@@ -70,9 +71,11 @@ updates:
 | Name                         | Description |
 |------------------------------|-------------|
 | [docker-tag-action]          | Determines Docker tags based on git branch, commit or git tag |
+| [git-ref-matrix-action]      | Create stringified JSON list of git refs to be used as a build matrix |
 | [shell-command-retry-action] | Retries shell commands to avoid failing pipelines due to network issues |
 
 [docker-tag-action]: https://github.com/cytopia/docker-tag-action
+[git-ref-matrix-action]: https://github.com/cytopia/git-ref-matrix-action
 [shell-command-retry-action]: https://github.com/cytopia/shell-command-retry-action
 
 
