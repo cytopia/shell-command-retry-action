@@ -19,6 +19,10 @@ inputs:
     description: 'Shell command to execute'
     required: true
     default: 'true'
+  workdir:
+    description: 'Switch to this working directory prior executing shell command'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -38,8 +42,12 @@ runs:
           done;
           return 1;
         }
+        if [ -n "${WORKDIR}" ]; then
+          cd "${WORKDIR}"
+        fi
         retry ${COMMAND}
       env:
         RETRIES: ${{ inputs.retries }}
         PAUSE: ${{ inputs.pause }}
         COMMAND: ${{ inputs.command }}
+        WORKDIR: ${{ inputs.workdir }}

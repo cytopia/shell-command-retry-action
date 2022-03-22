@@ -17,6 +17,7 @@ The following inputs can be used to alter the Docker tag name determination:
 | `retries` | No       | `10`     | How many times to retry on failure.       |
 | `pause`   | No       | `10`     | How many seconds to wait between retries. |
 | `command` | Yes      | ``       | Shell command to execute                  |
+| `workdir` | No       | ``       | Switch to this working directory prior executing the shell command |
 
 
 ## :arrow_backward: Outputs
