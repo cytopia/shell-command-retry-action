@@ -49,6 +49,9 @@ jobs:
             pause: 10
             command: |
               docker build -t test .
+            # Builing docker sometimes fails on GH Action runner due to network issues.
+            # We ensure that forwarding is reenabled and the daemon is restarted
+            # Before retrying the docker build command
             fail_command: |
               sudo sysctl -w net.ipv4.ip_forward=1 \
               && sudo systemctl restart docker \
