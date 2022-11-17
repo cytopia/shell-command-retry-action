@@ -4,17 +4,53 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: test
+  test-default:
+    name: test success
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: retry
         uses: ./
         with:
           command: true
+
+  test-fail-command-1:
+    name: test fail command 1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: retry
+        uses: ./
+        with:
+          command: false
+          retries: 2
+          pause: 1
+          fail_command: |
+            echo "This command has failed" \
+                && echo "Failed command concatenated"
+        continue-on-error: true
+
+  test-fail-command-2:
+    name: test fail command 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: retry
+        uses: ./
+        with:
+          command: false
+          retries: 2
+          pause: 1
+          fail_command: |
+            sudo sysctl -w net.ipv4.ip_forward=1 \
+            && sudo systemctl restart docker
+        continue-on-error: true

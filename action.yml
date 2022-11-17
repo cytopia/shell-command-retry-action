@@ -19,6 +19,10 @@ inputs:
     description: 'Shell command to execute'
     required: true
     default: 'true'
+  fail_command:
+    description: 'Shell command to execute on every failure of given command (The fail_command will always succeed via: || true)'
+    required: false
+    default: ''
   workdir:
     description: 'Switch to this working directory prior executing shell command'
     required: false
@@ -37,6 +41,11 @@ runs:
               echo "[SUCC] ${n}/${RETRIES}";
               return 0;
             fi;
+            if [ -n "${FAIL_COMMAND}" ]; then
+              echo "Executing fail command:";
+              echo "${FAIL_COMMAND}";
+              eval "${FAIL_COMMAND}" || true;
+            fi;
             sleep ${PAUSE};
             echo "[FAIL] ${n}/${RETRIES}";
           done;
@@ -51,3 +60,4 @@ runs:
         PAUSE: ${{ inputs.pause }}
         COMMAND: ${{ inputs.command }}
         WORKDIR: ${{ inputs.workdir }}
+        FAIL_COMMAND: ${{ inputs.fail_command }}
