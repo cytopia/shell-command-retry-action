@@ -29,6 +29,9 @@ jobs:
         uses: ./
         with:
           command: false
+          retries: 2
+          pause: 1
           fail_command: |
-            echo "This command has failed" && echo "Failed command concatenated"
+            echo "This command has failed" \
+                && echo "Failed command concatenated"
         continue-on-error: true
