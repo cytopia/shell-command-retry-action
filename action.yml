@@ -42,6 +42,8 @@ runs:
               return 0;
             fi;
             if [ -n "${FAIL_COMMAND}" ]; then
+              echo "Executing fail command:";
+              echo "${FAIL_COMMAND}";
               eval "${FAIL_COMMAND}" || true;
             fi;
             sleep ${PAUSE};
