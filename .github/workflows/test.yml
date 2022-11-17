@@ -8,12 +8,10 @@ jobs:
     name: test success
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: retry
         uses: ./
         with:
@@ -23,15 +21,14 @@ jobs:
     name: test fail command
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: retry
         uses: ./
         with:
           command: false
           fail_command: |
-            echo "This command has failed"
+            echo "This command has failed" && echo "Failed command concatenated"
+        continue-on-error: true
