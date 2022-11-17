@@ -12,12 +12,13 @@ This action allows you to retry shell command for a few times in case they fail.
 
 The following inputs can be used to alter the Docker tag name determination:
 
-| Input     | Required | Default | Description                                |
-|-----------|----------|----------|-------------------------------------------|
-| `retries` | No       | `10`     | How many times to retry on failure.       |
-| `pause`   | No       | `10`     | How many seconds to wait between retries. |
-| `command` | Yes      | ``       | Shell command to execute                  |
-| `workdir` | No       | ``       | Switch to this working directory prior executing the shell command |
+| Input          | Required | Default | Description                                |
+|----------------|----------|----------|-------------------------------------------|
+| `retries`      | No       | `10`     | How many times to retry on failure.       |
+| `pause`        | No       | `10`     | How many seconds to wait between retries. |
+| `command`      | Yes      | ``       | Shell command to execute.                 |
+| `workdir`      | No       | ``       | Switch to this working directory prior executing the shell command. |
+| `fail_command` | No       | ``       | Shell command to execute on every failure of given `command`. |
 
 
 ## :arrow_backward: Outputs
@@ -48,6 +49,9 @@ jobs:
             pause: 10
             command: |
               docker build -t test .
+            fail_command: |
+              sudo sysctl -w net.ipv4.ip_forward=1 \
+              && sudo systemctl restart docker \
 ```
 
 
